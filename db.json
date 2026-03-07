@@ -1,0 +1,59 @@
+{
+  "stats": [
+    { "id": "1", "label": "Usuários Ativos",       "value": "1.284", "change": "+12%", "positive": true,  "icon": "users"   },
+    { "id": "2", "label": "Projetos em Andamento", "value": "48",    "change": "+3%",  "positive": true,  "icon": "folder"  },
+    { "id": "3", "label": "Issues Resolvidas",     "value": "391",   "change": "+28%", "positive": true,  "icon": "check"   },
+    { "id": "4", "label": "Deploys com Falha",     "value": "5",     "change": "-40%", "positive": false, "icon": "alert"   }
+  ],
+  "activities": [
+    { "id": "1", "user": "Ana Costa",      "avatar": "AC", "action": "fez deploy do módulo",       "target": "dashboard-app",     "time": "2 min atrás",    "type": "deploy" },
+    { "id": "2", "user": "Bruno Lima",     "avatar": "BL", "action": "fechou 3 issues no sprint",  "target": "Sprint 23",         "time": "15 min atrás",   "type": "issue"  },
+    { "id": "3", "user": "Carla Mendes",   "avatar": "CM", "action": "abriu PR para revisão",      "target": "feat/remote-users", "time": "42 min atrás",   "type": "pr"     },
+    { "id": "4", "user": "Diego Rocha",    "avatar": "DR", "action": "atualizou docs da",           "target": "API Gateway",       "time": "1h 20min atrás", "type": "update" },
+    { "id": "5", "user": "Elena Souza",    "avatar": "ES", "action": "reportou falha crítica em",  "target": "reports-app",       "time": "2h atrás",       "type": "alert"  },
+    { "id": "6", "user": "Felipe Torres",  "avatar": "FT", "action": "mergeou branch",              "target": "fix/auth-token",    "time": "3h atrás",       "type": "pr"     },
+    { "id": "7", "user": "Gabriela Nunes", "avatar": "GN", "action": "fez deploy do módulo",       "target": "host-app",          "time": "4h atrás",       "type": "deploy" }
+  ],
+  "builds": [
+    { "id": "1", "module": "host",             "branch": "main",               "status": "success", "duration": "1m 12s", "time": "3 min atrás"  },
+    { "id": "2", "module": "remote-dashboard", "branch": "feat/new-charts",    "status": "running", "duration": "—",      "time": "agora"        },
+    { "id": "3", "module": "remote-users",     "branch": "fix/pagination",     "status": "success", "duration": "0m 58s", "time": "18 min atrás" },
+    { "id": "4", "module": "remote-reports",   "branch": "main",               "status": "failed",  "duration": "2m 04s", "time": "1h atrás"     },
+    { "id": "5", "module": "host",             "branch": "hotfix/sidebar-nav", "status": "success", "duration": "1m 33s", "time": "2h atrás"     }
+  ],
+  "users": [
+    { "id": "1",  "name": "Ana Costa",        "email": "ana.costa@devportal.com",        "role": "Admin",     "status": "active",   "squad": "Platform",   "avatar": "AC", "joinedAt": "2023-01-15" },
+    { "id": "2",  "name": "Bruno Lima",       "email": "bruno.lima@devportal.com",       "role": "Developer", "status": "active",   "squad": "Dashboard",  "avatar": "BL", "joinedAt": "2023-03-20" },
+    { "id": "3",  "name": "Carla Mendes",     "email": "carla.mendes@devportal.com",     "role": "Designer",  "status": "active",   "squad": "UX",         "avatar": "CM", "joinedAt": "2023-02-10" },
+    { "id": "4",  "name": "Diego Rocha",      "email": "diego.rocha@devportal.com",      "role": "Developer", "status": "inactive", "squad": "Users",      "avatar": "DR", "joinedAt": "2022-11-05" },
+    { "id": "5",  "name": "Elena Souza",      "email": "elena.souza@devportal.com",      "role": "QA",        "status": "active",   "squad": "Platform",   "avatar": "ES", "joinedAt": "2023-04-18" },
+    { "id": "6",  "name": "Felipe Torres",    "email": "felipe.torres@devportal.com",    "role": "Developer", "status": "active",   "squad": "Dashboard",  "avatar": "FT", "joinedAt": "2023-05-22" },
+    { "id": "7",  "name": "Gabriela Nunes",   "email": "gabriela.nunes@devportal.com",   "role": "Admin",     "status": "active",   "squad": "Platform",   "avatar": "GN", "joinedAt": "2022-09-14" },
+    { "id": "8",  "name": "Henrique Alves",   "email": "henrique.alves@devportal.com",   "role": "Developer", "status": "inactive", "squad": "Reports",    "avatar": "HA", "joinedAt": "2023-01-30" },
+    { "id": "9",  "name": "Isabela Ferreira", "email": "isabela.ferreira@devportal.com", "role": "Designer",  "status": "active",   "squad": "UX",         "avatar": "IF", "joinedAt": "2023-06-05" },
+    { "id": "10", "name": "João Barbosa",     "email": "joao.barbosa@devportal.com",     "role": "Developer", "status": "active",   "squad": "Dashboard",  "avatar": "JB", "joinedAt": "2023-07-12" },
+    { "id": "11", "name": "Karen Oliveira",   "email": "karen.oliveira@devportal.com",   "role": "QA",        "status": "active",   "squad": "Reports",    "avatar": "KO", "joinedAt": "2023-08-01" },
+    { "id": "12", "name": "Lucas Martins",    "email": "lucas.martins@devportal.com",    "role": "Developer", "status": "inactive", "squad": "Users",      "avatar": "LM", "joinedAt": "2022-12-20" },
+    { "id": "13", "name": "Mariana Dias",     "email": "mariana.dias@devportal.com",     "role": "Admin",     "status": "active",   "squad": "Platform",   "avatar": "MD", "joinedAt": "2022-08-10" },
+    { "id": "14", "name": "Nathan Cardoso",   "email": "nathan.cardoso@devportal.com",   "role": "Developer", "status": "active",   "squad": "Dashboard",  "avatar": "NC", "joinedAt": "2023-09-03" },
+    { "id": "15", "name": "Paula Ribeiro",    "email": "paula.ribeiro@devportal.com",    "role": "Designer",  "status": "active",   "squad": "UX",         "avatar": "PR", "joinedAt": "2023-10-15" },
+    { "id": "16", "name": "Bernardo Silva",   "email": "bernardo.silva@devportal.com",   "role": "Designer",  "status": "active",   "squad": "UX",         "avatar": "BS", "joinedAt": "2023-10-15" }
+  ],
+  "reports": [
+    { "id": "1",  "title": "Sprint 23 — Platform",   "squad": "Platform",   "period": "Fev 2026", "sprint": "Sprint 23", "deploysTotal": 12, "deploysOk": 12, "issuesClosed": 38, "avgCycleTime": "1.2 dias", "status": "healthy"  },
+    { "id": "2",  "title": "Sprint 23 — Dashboard",  "squad": "Dashboard",  "period": "Fev 2026", "sprint": "Sprint 23", "deploysTotal": 8,  "deploysOk": 7,  "issuesClosed": 21, "avgCycleTime": "2.1 dias", "status": "warning"  },
+    { "id": "3",  "title": "Sprint 23 — Users",      "squad": "Users",      "period": "Fev 2026", "sprint": "Sprint 23", "deploysTotal": 6,  "deploysOk": 6,  "issuesClosed": 15, "avgCycleTime": "0.9 dias", "status": "healthy"  },
+    { "id": "4",  "title": "Sprint 23 — Reports",    "squad": "Reports",    "period": "Fev 2026", "sprint": "Sprint 23", "deploysTotal": 4,  "deploysOk": 2,  "issuesClosed": 9,  "avgCycleTime": "3.5 dias", "status": "critical" },
+    { "id": "5",  "title": "Sprint 23 — UX",         "squad": "UX",         "period": "Fev 2026", "sprint": "Sprint 23", "deploysTotal": 5,  "deploysOk": 5,  "issuesClosed": 11, "avgCycleTime": "1.8 dias", "status": "healthy"  },
+    { "id": "6",  "title": "Sprint 22 — Platform",   "squad": "Platform",   "period": "Jan 2026", "sprint": "Sprint 22", "deploysTotal": 10, "deploysOk": 9,  "issuesClosed": 29, "avgCycleTime": "1.5 dias", "status": "warning"  },
+    { "id": "7",  "title": "Sprint 22 — Dashboard",  "squad": "Dashboard",  "period": "Jan 2026", "sprint": "Sprint 22", "deploysTotal": 7,  "deploysOk": 7,  "issuesClosed": 18, "avgCycleTime": "1.1 dias", "status": "healthy"  },
+    { "id": "8",  "title": "Sprint 22 — Users",      "squad": "Users",      "period": "Jan 2026", "sprint": "Sprint 22", "deploysTotal": 5,  "deploysOk": 4,  "issuesClosed": 12, "avgCycleTime": "2.7 dias", "status": "warning"  },
+    { "id": "9",  "title": "Sprint 22 — Reports",    "squad": "Reports",    "period": "Jan 2026", "sprint": "Sprint 22", "deploysTotal": 6,  "deploysOk": 6,  "issuesClosed": 22, "avgCycleTime": "1.3 dias", "status": "healthy"  },
+    { "id": "10", "title": "Sprint 22 — UX",         "squad": "UX",         "period": "Jan 2026", "sprint": "Sprint 22", "deploysTotal": 3,  "deploysOk": 1,  "issuesClosed": 7,  "avgCycleTime": "4.2 dias", "status": "critical" },
+    { "id": "11", "title": "Sprint 21 — Platform",   "squad": "Platform",   "period": "Dez 2025", "sprint": "Sprint 21", "deploysTotal": 9,  "deploysOk": 9,  "issuesClosed": 33, "avgCycleTime": "1.0 dias", "status": "healthy"  },
+    { "id": "12", "title": "Sprint 21 — Dashboard",  "squad": "Dashboard",  "period": "Dez 2025", "sprint": "Sprint 21", "deploysTotal": 6,  "deploysOk": 5,  "issuesClosed": 16, "avgCycleTime": "2.3 dias", "status": "warning"  },
+    { "id": "13", "title": "Sprint 21 — Users",      "squad": "Users",      "period": "Dez 2025", "sprint": "Sprint 21", "deploysTotal": 8,  "deploysOk": 8,  "issuesClosed": 27, "avgCycleTime": "0.8 dias", "status": "healthy"  },
+    { "id": "14", "title": "Sprint 21 — Reports",    "squad": "Reports",    "period": "Dez 2025", "sprint": "Sprint 21", "deploysTotal": 5,  "deploysOk": 3,  "issuesClosed": 14, "avgCycleTime": "3.1 dias", "status": "critical" },
+    { "id": "15", "title": "Sprint 21 — UX",         "squad": "UX",         "period": "Dez 2025", "sprint": "Sprint 21", "deploysTotal": 4,  "deploysOk": 4,  "issuesClosed": 9,  "avgCycleTime": "1.6 dias", "status": "healthy"  }
+  ]
+}
