@@ -10,7 +10,8 @@ Plataforma corporativa construída com **Module Federation** (React + Vite + Typ
 devportal/
 ├── host/                  → Shell App        (localhost:3000)
 ├── remote-dashboard/      → Remote Dashboard (localhost:3001)
-└── remote-users/          → Remote Users     (localhost:3002)
+├── remote-users/          → Remote Users     (localhost:3002)
+└── remote-reports/        → Remote Reports   (localhost:3003)
 ```
 
 ```
@@ -18,8 +19,9 @@ devportal/
 │              HOST (Port 3000)               │
 │  ┌──────────┐  ┌────────────────────────┐   │
 │  │ Sidebar  │  │   <DashboardRemote />  │ ← │── remoteDashboard/Dashboard
-│  │ Header   │  │   <UsersRemote />      │ ← │── remoteUsers/Users
-│  └──────────┘  └────────────────────────┘   │
+│  │          │  │   <UsersRemote />      │ ← │── remoteUsers/Users
+│  └──────────┘  │   <ReportsRemote />   │ ← │── remoteReports/Reports
+│                └────────────────────────┘   │
 └─────────────────────────────────────────────┘
 ```
 
@@ -32,10 +34,12 @@ devportal/
 | Host | `localhost:3000/` | Home com cards dos módulos |
 | Host | `localhost:3000/dashboard` | Carrega Dashboard via Module Federation |
 | Host | `localhost:3000/users` | Carrega Users via Module Federation |
+| Host | `localhost:3000/reports` | Carrega Reports via Module Federation |
 | Remote Dashboard | `localhost:3001/` | Dashboard standalone |
 | Remote Dashboard | `localhost:3001/activity` | Log de atividades (lazy loaded) |
 | Remote Users | `localhost:3002/` | Usuários standalone |
 | Remote Users | `localhost:3002/roles` | Cargos e permissões (lazy loaded) |
+| Remote Reports | `localhost:3003/` | Relatórios standalone |
 
 ---
 
@@ -52,28 +56,54 @@ devportal/
 cd host && npm install
 cd remote-dashboard && npm install
 cd remote-users && npm install
+cd remote-reports && npm install
 ```
 
-### Passo 2 — Build e Preview dos Remotes
+### Passo 2 — Subir a API Fake
+
+O projeto usa `json-server` para simular uma API REST a partir do `db.json` na raiz.
+
+```bash
+# Terminal 1 — API Fake (qualquer remote com json-server instalado)
+cd remote-dashboard
+npm run api     # serve em localhost:3100
+```
+
+Endpoints disponíveis:
+
+| Endpoint | Descrição |
+|---|---|
+| `GET localhost:3100/stats` | Cards de estatísticas |
+| `GET localhost:3100/activities` | Log de atividades |
+| `GET localhost:3100/builds` | Histórico de builds |
+| `GET localhost:3100/users` | Lista de usuários |
+| `GET localhost:3100/reports` | Relatórios de sprint |
+
+### Passo 3 — Build e Preview dos Remotes
 
 > **Importante:** `@originjs/vite-plugin-federation` exige build antes de servir.
 
 ```bash
-# Terminal 1 — Remote Dashboard
+# Terminal 2 — Remote Dashboard
 cd remote-dashboard
 npm run build
 npm run preview     # serve em localhost:3001
 
-# Terminal 2 — Remote Users
+# Terminal 3 — Remote Users
 cd remote-users
 npm run build
 npm run preview     # serve em localhost:3002
+
+# Terminal 4 — Remote Reports
+cd remote-reports
+npm run build
+npm run preview     # serve em localhost:3003
 ```
 
-### Passo 3 — Rodar o Host
+### Passo 4 — Rodar o Host
 
 ```bash
-# Terminal 3 — Host
+# Terminal 5 — Host
 cd host
 npm run dev         # serve em localhost:3000
 ```
@@ -105,17 +135,17 @@ Acesse: **http://localhost:3000**
 - Filtragem de stats do dashboard memoizada
 - Lista de usuários filtrada memoizada
 
-### useCallback (Sidebar.tsx + Header.tsx + useUsers.ts)
-- Handlers de navegação e notificações memoizados
+### useCallback (Sidebar.tsx + useUsers.ts)
+- Handlers de navegação memoizados
 - Setters de filtro memoizados no hook de usuários
 
-### memo (StatsCard, ActivityItem, UserCard, UserSearch)
+### memo (StatsCard, ActivityItem, UserSearch)
 - Componentes de lista com `React.memo` para evitar re-renders
 
-### Lazy + Suspense (DashboardRemotePage, UsersRemotePage)
+### Lazy + Suspense (DashboardRemotePage, UsersRemotePage, ReportsRemotePage)
 - Carregamento dinâmico dos remotes com fallback de loading
 
-### Error Boundary (DashboardRemotePage, UsersRemotePage)
+### Error Boundary (DashboardRemotePage, UsersRemotePage, ReportsRemotePage)
 - Tratamento gracioso quando remote está offline
 
 ---
@@ -161,32 +191,49 @@ host/src/
 ├── bootstrap.tsx              # Entry point (padrão MFE)
 ├── main.tsx                   # Dynamic import do bootstrap
 ├── index.css                  # Tailwind base
+├── types.ts                   # Tipos globais do host
 ├── context/
 │   └── GlobalContext.tsx      # useReducer global state
 ├── components/
 │   ├── Layout.tsx             # Shell layout
-│   ├── Sidebar.tsx            # Navegação com useCallback
-│   └── Header.tsx             # Notificações com useCallback
+│   └── Sidebar.tsx            # Navegação com useCallback
 ├── pages/
 │   ├── HomePage.tsx           # Landing com cards de módulos
 │   ├── DashboardRemotePage.tsx  # Lazy + Suspense + ErrorBoundary
-│   └── UsersRemotePage.tsx      # Lazy + Suspense + ErrorBoundary
+│   ├── UsersRemotePage.tsx      # Lazy + Suspense + ErrorBoundary
+│   └── ReportsRemotePage.tsx    # Lazy + Suspense + ErrorBoundary
 └── types/
     └── remotes.d.ts           # Type declarations dos remotes
 
 remote-dashboard/src/
-├── data/dashboardData.ts      # Mock de stats e atividades
+├── types.ts                   # Tipos do remote-dashboard
+├── services/dashboardService.ts  # Serviço de dados
 ├── hooks/useDashboard.ts      # useMemo + useCallback
 ├── components/
 │   ├── StatsCard.tsx          # memo component
 │   └── RecentActivity.tsx     # memo component
-└── pages/DashboardPage.tsx    # Página exposta via MFE
+└── pages/
+    ├── DashboardPage.tsx      # Página exposta via MFE
+    └── ActivityPage.tsx       # Log de atividades (lazy)
 
 remote-users/src/
-├── data/usersData.ts          # Mock de 8 usuários
+├── types.ts                   # Tipos do remote-users
+├── services/usersService.ts   # Serviço de dados
+├── data/usersData.ts          # Mock de 15 usuários
 ├── hooks/useUsers.ts          # useReducer + useMemo + useCallback
 ├── components/
-│   ├── UserCard.tsx           # memo component
 │   └── UserSearch.tsx         # memo component
-└── pages/UsersPage.tsx        # Página exposta via MFE
+└── pages/
+    ├── UsersPage.tsx          # Página exposta via MFE
+    └── RolesPage.tsx          # Cargos e permissões (lazy)
+
+remote-reports/src/
+├── types.ts                   # Tipos do remote-reports
+├── services/reportsService.ts # Serviço de dados
+├── data/reportsData.ts        # Mock de 15 relatórios
+├── hooks/useReports.ts        # Filtragem e paginação
+├── components/
+│   └── DailyChart.tsx         # Gráfico de barras com filtros
+└── pages/
+    └── ReportsPage.tsx        # Página exposta via MFE
 ```
