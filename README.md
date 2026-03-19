@@ -122,22 +122,28 @@ Acesse: **http://localhost:3000**
 | @originjs/vite-plugin-federation | 1.3.x | Module Federation |
 | React Router DOM | 6.x | Roteamento |
 | Tailwind CSS | 3.x | Estilização |
+| json-server | 1.x | API REST fake (mock de dados) |
 
 ---
 
 ## Conceitos React Demonstrados
 
+### useContext (GlobalContext.tsx → useGlobal)
+- Contexto global consumido via hook customizado `useGlobal()`
+- Utilizado em Sidebar.tsx para acessar estado e dispatch do GlobalContext
+
 ### useReducer (GlobalContext.tsx + useUsers.ts)
 - Estado global do host gerenciado com `useReducer`
 - Filtros de usuários com `useReducer` no remote-users
 
-### useMemo (useDashboard.ts + useUsers.ts)
+### useMemo (useDashboard.ts + useUsers.ts + useReports.ts)
 - Filtragem de stats do dashboard memoizada
 - Lista de usuários filtrada memoizada
+- Filtragem e paginação de relatórios memoizadas
 
-### useCallback (Sidebar.tsx + useUsers.ts)
+### useCallback (Sidebar.tsx + useDashboard.ts + useUsers.ts + useReports.ts)
 - Handlers de navegação memoizados
-- Setters de filtro memoizados no hook de usuários
+- Handlers de filtro memoizados em todos os hooks de dados
 
 ### memo (StatsCard, ActivityItem, UserSearch)
 - Componentes de lista com `React.memo` para evitar re-renders
@@ -162,10 +168,10 @@ Acesse: **http://localhost:3000**
 - Evita dependência extra (redux, zustand)
 - Demonstra uso correto de hooks avançados
 
-### Por que dados mockados em arquivos `.ts`?
-- Isolamento total do frontend
-- Tipagem TypeScript completa nos dados
-- Fácil substituição por chamadas de API reais
+### Por que json-server + arquivos `.ts` para dados mockados?
+- `json-server` simula uma API REST real (GET por endpoint), aproximando o comportamento de produção
+- Arquivos `.ts` complementam com dados locais tipados, sem dependência de rede
+- A combinação garante isolamento total do frontend e fácil substituição por uma API real
 
 ### Por que `bootstrap.tsx` + `main.tsx` separados?
 - Padrão obrigatório para Module Federation funcionar
