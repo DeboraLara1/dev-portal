@@ -61,12 +61,12 @@ cd remote-reports && npm install
 
 ### Passo 2 — Subir a API Fake
 
-O projeto usa `json-server` para simular uma API REST a partir do `db.json` na raiz.
+O projeto usa `json-server` para simular uma API REST a partir do `db.json` na raiz. O `json-server` está instalado nos remotes, por isso o script é executado a partir de um deles — ele aponta para `../db.json` (raiz do monorepo).
 
 ```bash
-# Terminal 1 — API Fake (qualquer remote com json-server instalado)
-cd remote-dashboard
-npm run api     # serve em localhost:3100
+# Terminal 1 — API Fake
+cd remote-dashboard   # json-server instalado aqui
+npm run api           # lê ../db.json → serve em localhost:3100
 ```
 
 Endpoints disponíveis:
